@@ -19,11 +19,7 @@ app.get("/", (_req, res) => {
 });
 
 app.get("/backend", async (_req, res) => {
-    const request = axios.get(`http://localhost:${process.env.DAPR_HTTP_PORT}/test`, {
-        headers: {
-            "dapr-app-id": "nodeservice"
-        }
-    });
+    const request = axios.get(`http://dapr-app-id:nodeservice@localhost:${process.env.DAPR_HTTP_PORT}/test`);
     request.then((_res) => {
             res.json(_res.data);
         }).catch((err) => {
