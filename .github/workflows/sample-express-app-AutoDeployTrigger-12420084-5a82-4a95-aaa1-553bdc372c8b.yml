@@ -14,11 +14,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
-    # strategy:
-    #   matrix:
-    #     os: [self-hosted, ubuntu-latest]
-    #     node-version: [16.x]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout to the branch
