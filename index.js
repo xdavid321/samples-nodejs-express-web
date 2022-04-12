@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 console.log(process.env);
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
     const content = `
         <h4>Sample express.js application</h4>
         <h5>Added DAPR</h5>
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
     res.send(content);
 });
 
-app.get("/backend", async (req, res) => {
+app.get("/backend", async (_req, res) => {
     const request = axios.get(`http://localhost:${process.env.DAPR_HTTP_PORT}/test`, {
         headers: {
             "dapr-app-id": "nodeservice"
@@ -28,9 +28,7 @@ app.get("/backend", async (req, res) => {
             res.json(_res.data);
         }).catch((err) => {
             console.error(JSON.stringify(err));
-            res.status(500).json({
-                message: "Internal server error"
-            })
+            res.status(500).send(err);
         })
 })
 const port = 80;
