@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: pocsamples.azurecr.io/sample-express-app:${{ github.sha }}
+          tags: pocsamples.azurecr.io/express-web:${{ github.sha }}
           context: ./
 
 
@@ -56,5 +56,5 @@ jobs:
             echo "Installing containerapp extension"
             az extension add --source https://containerappcli.blob.core.windows.net/containerapp/containerapp-0.1.3-py2.py3-none-any.whl --yes
             echo "Starting Deploying"
-            az containerapp registry set -n sample-express-app -g container-poc --server pocsamples.azurecr.io --username  ${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }} --debug
-            az containerapp update -n sample-express-app -g container-poc --image pocsamples.azurecr.io/sample-express-app:${{ github.sha }}
+            az containerapp registry set -n express-web -g container-poc --server pocsamples.azurecr.io --username  ${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }} --debug
+            az containerapp update -n node-express-web -g container-poc --image pocsamples.azurecr.io/express-web:${{ github.sha }}
