@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
     const content = `
-        <h3>Sample express.js application</h3>
+        <h4>Sample express.js application</h4>
         <p>/backend - communicate with backend container</p>
     `
     res.send(content);
