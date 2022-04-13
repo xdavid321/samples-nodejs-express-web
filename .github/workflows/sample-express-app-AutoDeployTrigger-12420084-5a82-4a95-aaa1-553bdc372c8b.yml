@@ -36,23 +36,23 @@ jobs:
           context: ./
 
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
     
-    steps:
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #   steps:
+  #     - name: Azure Login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
 
-      - name: Deploy to containerapp
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            echo "Installing containerapp extension"
-            az extension add --source https://containerappcli.blob.core.windows.net/containerapp/containerapp-0.1.3-py2.py3-none-any.whl --yes
-            echo "Starting Deploying"
-            az containerapp registry set -n node-express-web -g container-poc --server containerpocsamples.azurecr.io --username  ${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }} --debug
-            az containerapp update -n node-express-web -g container-poc --image containerpocsamples.azurecr.io/express-web:${{ github.sha }}
+  #     - name: Deploy to containerapp
+  #       uses: azure/CLI@v1
+  #       with:
+  #         inlineScript: |
+  #           echo "Installing containerapp extension"
+  #           az extension add --source https://containerappcli.blob.core.windows.net/containerapp/containerapp-0.1.3-py2.py3-none-any.whl --yes
+  #           echo "Starting Deploying"
+  #           az containerapp registry set -n node-express-web -g container-poc --server containerpocsamples.azurecr.io --username  ${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }} --debug
+  #           az containerapp update -n node-express-web -g container-poc --image containerpocsamples.azurecr.io/express-web:${{ github.sha }}
